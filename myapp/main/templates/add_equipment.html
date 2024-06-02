@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        <section id="Equipment">
+
+            <form method="post" action="{% url 'add_equipment' %}">
+
+                {% csrf_token %}
+
+                <div class="equipment-id">
+                    {{ equipment_form.equipment_id.label }}
+                    {{ equipment_form.equipment_id }}
+                </div>
+                
+                <div class="equipment-model">
+                    {{ equipment_form.equipment_model.label }}
+                    {{ equipment_form.equipment_model }}
+                </div>
+
+                <div class="equipment-name">
+                    {{ equipment_form.equipment_name.label }}
+                    {{ equipment_form.equipment_name }}
+                </div>
+
+                <div class="equipment-description">
+                    {{ equipment_form.equipment_description.label }}
+                    {{ equipment_form.equipment_description }}
+                </div>
+
+                <div class="add-equipment">
+                    <button type="submit">Add Equipment</button>
+                </div>
+
+            </form>
+
+        </section>
+        <h1>Hi!</h1>
+    </body>
+</html>

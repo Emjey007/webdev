@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import EquipmentForm
+from .models import AllEquipment
 
 # Create your views here.
 
@@ -18,4 +19,8 @@ def add_equipment(request):
         equipment_form = EquipmentForm()
 
     return render(request, 'add_equipment.html', { 'equipment_form': equipment_form })
+
+def available_equipment(request):
+    equipments = AllEquipment.objects.all()
+    return render(request, 'available_equipment.html', {'equipments': equipments})
 

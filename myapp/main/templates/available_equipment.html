@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Available Equipment</title>
+    </head>
+    <body>
+        {% for equipment in equipments %}
+        <div>
+            <p>{{ equipment.equipment_id }}</p>
+            <p>{{ equipment.equipment_model }}</p>
+            <p>{{ equipment.equipment_name }}</p> 
+            <p>{{ equipment.equipment_description }}</p>
+        </div>
+        {% endfor %}
+    </body>
+</html>

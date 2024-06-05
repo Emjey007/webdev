@@ -1,5 +1,5 @@
 from django import forms
-from .models import Equipment
+from .models import AllEquipment
 
 class EquipmentForm(forms.ModelForm):
     equipment_id = forms.CharField(required=True)
@@ -8,7 +8,7 @@ class EquipmentForm(forms.ModelForm):
     equipment_description = forms.CharField(required=True)
 
     class Meta:
-        model = Equipment
+        model = AllEquipment
         fields = ['equipment_id', 
                   'equipment_model', 
                   'equipment_name', 

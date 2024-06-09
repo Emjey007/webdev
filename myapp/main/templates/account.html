@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Available Equipment</title>
+        <title>Accounts</title>
     </head>
     <body>
+        <h1>Accounts</h1>
         {% for account in accounts %}
-        <div>
-            <p>{{ accounts.email }}</p>
-            <p>{{ accounts.job }}</p>
-            <p>{{ accounts.username }}</p>
-            <p>{{ accounts.first_name }}</p>
-            <p>{{ accounts.last_name }}</p>
-            <p>{{ accounts.email }}</p>
-        </div>
+            <div>
+                <p>{{ account.name }}</p>
+                <p>{{ account.job }}</p>
+                <p>{{ account.username }}</p>
+                <p>{{ account.first_name }}</p>
+                <p>{{ account.last_name }}</p>
+                <p>{{ account.email }}</p>
+            </div>
         {% endfor %}
     </body>
 </html>

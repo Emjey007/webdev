@@ -1,55 +1,38 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 # This is the database for Client: ####
 
+class UserClassification(models.Model):
+    # is_mechanic = models.BooleanField(default=False)
+    # is_client = models.BooleanField(default=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+    email = models.EmailField(unique=True, null=True, blank=True)
+    job = models.IntegerField(choices=[(1, 'User'), (2, 'Mechanic')], null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
 class AllEquipment(models.Model):
-    equipment_id = models.CharField(max_length=100)
-    equipment_model = models.CharField(max_length=100, unique=True) # This is our primary key to separate each
-                                                                    # equipment with each other since they have
-                                                                    # the same id to the same type of equipment.
-    equipment_name = models.CharField(max_length=100)
-    equipment_description = models.CharField(max_length=250)
+    equipment_id = models.CharField(max_length=100, default='', blank=False)
+    equipment_model = models.CharField(max_length=100, unique=True) 
+    equipment_category = models.CharField(max_length=100, default='', blank=False) 
+    equipment_name = models.CharField(max_length=100, default='', blank=False)
+    equipment_description = models.CharField(max_length=250, default='', blank=False)
+    is_available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.equipment_name
+    
+class EquipmentOnMission(models.Model):
+    equipment = models.ForeignKey(AllEquipment, on_delete=models.CASCADE)
+    equipment_model = models.CharField(max_length=100, default='', blank=False)
+    equipment_name = models.CharField(max_length=100, default='', blank=False)
+    equipment_description = models.CharField(max_length=250, default='', blank=False)
 
-# class EquipmentOnMission(models.Model):
-#     equipment_id = models.CharField(max_length=100)
-#     equipment_model = models.CharField(max_length=100, unique=True)
-#     equipment_name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.equipment.equipment_model
 
-# class EquipmentNeedingRepair(models.Model):
-#     equipment_id = models.CharField(max_length=100)
-#     equipment_model = models.CharField(max_length=100, unique=True)
-#     equipment_name = models.CharField(max_length=100)
-#     equipment_issue_description = models.CharField(max_length=250)
-
-# class BrokenEquipment(models.Model):
-#     equipment_id = models.CharField(max_length=100)
-#     equipment_model = models.CharField(max_length=100, unique=True)
-#     equipment_name = models.CharField(max_length=100)
-
-# class ReturnedEquipment(models.Model):
-#     equipment_id = models.CharField(max_length=100)
-#     equipment_model = models.CharField(max_length=100, unique=True)
-#     equipment_name = models.CharField(max_length=100)
-#     equipment_fixed_update = models.CharField(max_length=250)
-
-
-
-
-# This is the database for Mechanics: ####
-
-# class EquipmentToBeRepaired(models.Model): 
-#     equipment_id = models.CharField(max_length=100)
-#     equipment_model = models.CharField(max_length=100, unique=True)
-#     equipment_name = models.CharField(max_length=100)
-#     equipment_issue_description = models.CharField(max_length=250)
-
-# class GiveBackEquipment(models.Model):
-#     equipment_id = models.CharField(max_length=100)
-#     equipment_model = models.CharField(max_length=100, unique=True)
-#     equipment_name = models.CharField(max_length=100)
-#     equipment_update = models.CharField(max_length=250)

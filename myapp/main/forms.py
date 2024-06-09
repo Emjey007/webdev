@@ -1,5 +1,21 @@
 from django import forms
-from .models import AllEquipment
+from django.contrib.auth.forms import UserCreationForm
+from .models import UserClassification, AllEquipment
+
+class RegistrationForm(UserCreationForm):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+
+    class User:
+            model = UserClassification
+            fields = ['job',
+                      'username',
+                      'first_name', 
+                      'last_name', 
+                      'email',
+                      'password1', 
+                      'password2']
 
 class EquipmentForm(forms.ModelForm):
     equipment_id = forms.CharField(required=True)
@@ -13,4 +29,4 @@ class EquipmentForm(forms.ModelForm):
                   'equipment_model', 
                   'equipment_name', 
                   'equipment_description']
-        
+

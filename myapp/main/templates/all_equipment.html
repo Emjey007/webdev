@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>All Equipment</title>
+    </head>
+    <body>
+        {% for equipment in all_equipment %}
+        <div>
+            <p>{{ equipment.equipment_id }}</p>
+            <p>{{ equipment.equipment_model }}</p>
+            <p>{{ equipment.equipment_category }}</p> 
+            <p>{{ equipment.equipment_name }}</p> 
+            <p>{{ equipment.equipment_description }}</p>
+            <!-- {% if not equipment.equipmentonmission_set.exists %}
+            <p>Status: Available</p>
+            <form method="post" action="{% url 'duplicate_equipment' equipment.id %}">
+                {% csrf_token %}
+                <button type="submit">Duplicate</button>
+            </form>
+            {% else %}
+            <p>Status: On Mission</p>
+            {% endif %} -->
+            {% if not equipment.equipmentonmission_set.exists and not equipment.damagedequipment_set.exists %}
+            <p>Status: Available</p>
+            <form method="post" action="{% url 'duplicate_equipment' equipment.id %}">
+                {% csrf_token %}
+                <button type="submit">Deploy in Mission</button>
+            </form>
+            <form method="post" action="{% url 'duplicate_equipment1' equipment.id %}">
+                {% csrf_token %}
+                <button type="submit">Put in Damaged</button>
+            </form>
+            {% elif equipment.equipmentonmission_set.exists %}
+                <p>Status: On Mission</p>
+            {% elif equipment.damagedequipment_set.exists %}
+                <p>Status: Damaged</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </body>
+</html>

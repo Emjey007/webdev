@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Available Equipment</title>
+        <title>Equipment on Mission</title>
     </head>
     <body>
-        {% for equipment in equipments %}
+        {% for equipment in damaged_equipment %}
         <div>
-            <p>{{ equipment.equipment_id }}</p>
+            <p>{{ equipment.equipment_id_on_damaged }}</p>
             <p>{{ equipment.equipment_model }}</p>
+            <p>{{ equipment.equipment_category }}</p>
             <p>{{ equipment.equipment_name }}</p> 
             <p>{{ equipment.equipment_description }}</p>
         </div>

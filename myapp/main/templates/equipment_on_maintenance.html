@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Equipment on Maintenance</title>
+    </head>
+    <body>
+        {% for equipment in equipment_on_maintenance %}
+        <div>
+            <p>{{ equipment.equipment_id_on_maintenance }}</p>
+            <p>{{ equipment.equipment_model }}</p>
+            <p>{{ equipment.equipment_category }}</p>
+            <p>{{ equipment.equipment_name }}</p> 
+            <p>{{ equipment.equipment_description }}</p>
+            <form method="post" action="{% url 'remove_equipment_from_maintenance' equipment.all_equipment.id %}">
+                {% csrf_token %}
+                <button type="submit">Remove from Maintenance</button>
+            </form>
+        </div>
+        {% endfor %}
+    </body>
+</html>

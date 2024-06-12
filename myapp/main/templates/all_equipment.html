@@ -11,28 +11,25 @@
             <p>{{ equipment.equipment_category }}</p> 
             <p>{{ equipment.equipment_name }}</p> 
             <p>{{ equipment.equipment_description }}</p>
-            <!-- {% if not equipment.equipmentonmission_set.exists %}
+            {% if not equipment.equipmentonmission_set.exists and not equipment.damagedequipment_set.exists and not equipment.equipmentonmaintenance_set.exists %}
             <p>Status: Available</p>
-            <form method="post" action="{% url 'duplicate_equipment' equipment.id %}">
-                {% csrf_token %}
-                <button type="submit">Duplicate</button>
-            </form>
-            {% else %}
-            <p>Status: On Mission</p>
-            {% endif %} -->
-            {% if not equipment.equipmentonmission_set.exists and not equipment.damagedequipment_set.exists %}
-            <p>Status: Available</p>
-            <form method="post" action="{% url 'duplicate_equipment' equipment.id %}">
+            <form method="post" action="{% url 'deploy_equipment_on_mission' equipment.id %}">
                 {% csrf_token %}
                 <button type="submit">Deploy in Mission</button>
             </form>
-            <form method="post" action="{% url 'duplicate_equipment1' equipment.id %}">
+            <form method="post" action="{% url 'move_equipment_to_maintenance' equipment.id %}">
                 {% csrf_token %}
-                <button type="submit">Put in Damaged</button>
+                <button type="submit">Move in Maintenance</button>
+            </form>
+            <form method="post" action="{% url 'move_equipment_to_damaged_equipment' equipment.id %}">
+                {% csrf_token %}
+                <button type="submit">Move in Damaged Equipment</button>
             </form>
             {% elif equipment.equipmentonmission_set.exists %}
                 <p>Status: On Mission</p>
-            {% elif equipment.damagedequipment_set.exists %}
+            {% elif equipment.equipmentonmaintenance_set.exists %}
+                <p>Status: Under Maintenance</p>
+            {% elif equipment.damagedequipment_set.exists and not equipment.equipmentonmission_set.exists %}
                 <p>Status: Damaged</p>
             {% endif %}
         </div>

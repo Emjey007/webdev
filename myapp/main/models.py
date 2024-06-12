@@ -36,10 +36,32 @@ class EquipmentOnMission(models.Model):
 
     def __str__(self):
         return self.equipment_model
+    
+class EquipmentOnMaintenance(models.Model):
+    all_equipment = models.ForeignKey(AllEquipment, on_delete=models.CASCADE)
+    equipment_id_on_maintenance = models.CharField(max_length=100, default='', blank=False)
+    equipment_model = models.CharField(max_length=100, default='', blank=False)
+    equipment_category = models.CharField(max_length=100, default='', blank=False)
+    equipment_name = models.CharField(max_length=100, default='', blank=False)
+    equipment_description = models.CharField(max_length=250, default='', blank=False)
+
+    def __str__(self):
+        return self.equipment_model
 
 class DamagedEquipment(models.Model):
     all_equipment = models.ForeignKey(AllEquipment, on_delete=models.CASCADE)
     equipment_id_on_damaged = models.CharField(max_length=100, default='', blank=False)
+    equipment_model = models.CharField(max_length=100, default='', blank=False)
+    equipment_category = models.CharField(max_length=100, default='', blank=False)
+    equipment_name = models.CharField(max_length=100, default='', blank=False)
+    equipment_description = models.CharField(max_length=250, default='', blank=False)
+
+    def __str__(self):
+        return self.equipment_model
+    
+class ReturnedEquipment(models.Model):
+    all_equipment = models.ForeignKey(AllEquipment, on_delete=models.CASCADE)
+    equipment_id_on_returned = models.CharField(max_length=100, default='', blank=False)
     equipment_model = models.CharField(max_length=100, default='', blank=False)
     equipment_category = models.CharField(max_length=100, default='', blank=False)
     equipment_name = models.CharField(max_length=100, default='', blank=False)

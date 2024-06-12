@@ -26,11 +26,15 @@
                 <button type="submit">Move in Damaged Equipment</button>
             </form>
             {% elif equipment.equipmentonmission_set.exists %}
-                <p>Status: On Mission</p>
+                {% if equipment.damagedequipment_set.exists and equipment.equipmentonmission_set.exists %}
+                    <p>Status: Broken</p>
+                {% elif equipment.equipmentonmission_set.exists %}
+                    <p>Status: On Mission</p>
+                {% endif %}
             {% elif equipment.equipmentonmaintenance_set.exists %}
                 <p>Status: Under Maintenance</p>
-            {% elif equipment.damagedequipment_set.exists and not equipment.equipmentonmission_set.exists %}
-                <p>Status: Damaged</p>
+            {% elif equipment.damagedequipment_set.exists %}
+                <p>Status: Broken</p>
             {% endif %}
         </div>
         {% endfor %}

@@ -15,7 +15,7 @@
                 {% csrf_token %}
                 <button type="submit">Remove from Mission</button>
             </form>
-            <form method="post" action="{% url 'move_equipment_to_damaged_equipment' equipment.id %}">
+            <form method="post" action="{% url 'move_equipment_to_damaged_equipment' equipment.all_equipment.id %}">
                 {% csrf_token %}
                 <button type="submit">Move in Damaged Equipment (NOT WORKING)</button>
             </form>

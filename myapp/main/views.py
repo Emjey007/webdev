@@ -152,16 +152,21 @@ def remove_equipment_from_maintenance(request, equipment_id):
 
 # DI PA OKAY!
 def from_mission_to_damaged_equipment(request, equipment_id):
-    equipment = get_object_or_404(EquipmentOnMission, id=equipment_id)
-    DamagedEquipment.objects.create(
-        all_equipment=equipment,
-        equipment_id_on_damaged=equipment.equipment_id_on_mission,
-        equipment_model=equipment.equipment_model,
-        equipment_category=equipment.equipment_category,
-        equipment_name=equipment.equipment_name,
-        equipment_description=equipment.equipment_description,
-    )
-    return redirect('remove_equipment_from_mission', 'all_equipment')
+    if request.method == "POST":
+        equipment = get_object_or_404(EquipmentOnMission, id=equipment_id)
+        DamagedEquipment.objects.create(
+            all_equipment=equipment.all_equipment,
+            equipment_id_on_damaged=equipment.equipment_id_on_mission,
+            equipment_model=equipment.equipment_model,
+            equipment_category=equipment.equipment_category,
+            equipment_name=equipment.equipment_name,
+            equipment_description=equipment.equipment_description,
+        )
+
+        if equipment:
+            equipment.delete()
+
+        return redirect('all_equipment')
 
 # def move_equipment(request):
 #     if request.method == 'POST':

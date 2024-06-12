@@ -11,6 +11,14 @@
             <p>{{ equipment.equipment_category }}</p>
             <p>{{ equipment.equipment_name }}</p> 
             <p>{{ equipment.equipment_description }}</p>
+            <form method="post" action="{% url 'remove_equipment_from_mission' equipment.all_equipment.id %}">
+                {% csrf_token %}
+                <button type="submit">Remove from Mission</button>
+            </form>
+            <form method="post" action="{% url 'move_equipment_to_damaged_equipment' equipment.id %}">
+                {% csrf_token %}
+                <button type="submit">Move in Damaged Equipment (NOT WORKING)</button>
+            </form>
         </div>
         {% endfor %}
     </body>

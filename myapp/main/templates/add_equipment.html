@@ -5,9 +5,7 @@
     </head>
     <body>
         <section id="Equipment">
-
             <form method="post" action="{% url 'add_equipment' %}">
-
                 {% csrf_token %}
 
                 <div class="equipment-id">
@@ -38,10 +36,7 @@
                 <div class="add-equipment">
                     <button type="submit">Add Equipment</button>
                 </div>
-
             </form>
-
         </section>
-        <h1>Hi!</h1>
     </body>
 </html>

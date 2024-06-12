@@ -161,10 +161,8 @@ def from_mission_to_damaged_equipment(request, equipment_id):
         equipment_name=equipment.equipment_name,
         equipment_description=equipment.equipment_description,
     )
+
     return redirect('all_equipment')
-
-
-    
 
 # def move_equipment(request):
 #     if request.method == 'POST':

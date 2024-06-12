@@ -4,6 +4,9 @@
         <title>All Equipment</title>
     </head>
     <body>
+        <a href="{% url 'add_equipment' %}">
+            Add Equipment
+        </a>
         {% for equipment in all_equipment %}
         <div>
             <p>{{ equipment.equipment_id }}</p>
